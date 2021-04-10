@@ -24,7 +24,7 @@ stage('Docker build for Prod') {
  stage('Push image') {
      steps{
          script{
-        withDockerRegistry(credentialsId: "dockerhub", url: "https://registry.hub.docker.com/") {
+        dockerImage.withDockerRegistry(credentialsId: "dockerhub", url: "https://registry.hub.docker.com/") {
         dockerImage.push()
         }
  }
