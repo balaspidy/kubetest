@@ -30,7 +30,7 @@ stage('Docker build for Prod') {
  }
     steps {
       script {
-          dockerImage = docker.build registrye + ":$BUILD_NUMBER"
+          dockerImage = docker.build registry2 + ":$BUILD_NUMBER"
          
       }
     }
