@@ -17,11 +17,21 @@ stage('Docker build for Prod') {
     steps {
       script {
           dockerImage = docker.build registry1 + ":$BUILD_NUMBER"
-          docker.withRegistry( '', registryCredential ) 
-          dockerImage.push()
+         
       }
- }
-}
+    }
+} 
+ stage('Push Image') {
+      steps{
+        script {
+          docker.withRegistry( "" ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+        
+        
 }
 }
 
