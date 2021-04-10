@@ -54,7 +54,7 @@ stage('Apply Kubernetes files in Prod') {
     withKubeConfig([credentialsId: 'kubeid', serverUrl: 'https://10.128.0.7:6443']) {
     sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
     sh 'chmod u+x ./kubectl' 
-    sh 'cat frontend.yaml | sed "s/{{namespace}}/$namespace1/g"| sed "s/{{port}}/$port1/g" | `pwd`/kubectl apply -f -'
+    sh 'cat frontend.yaml | sed "s/{{namespace}}/$namespace2/g"| sed "s/{{port}}/$port2/g" |sed "s/{{dockerimage}}/$dockerImage/g"| `pwd`/kubectl apply -f -'
     }
     }
   }
@@ -70,7 +70,7 @@ stage('Apply Kubernetes files in Prod') {
     withKubeConfig([credentialsId: 'kubeid', serverUrl: 'https://10.128.0.7:6443']) {
     sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
     sh 'chmod u+x ./kubectl' 
-    sh 'cat frontend.yaml | sed "s/{{namespace}}/$namespace2/g"| sed "s/{{port}}/$port2/g" | `pwd`/kubectl apply -f -'
+    sh 'cat frontend.yaml | sed "s/{{namespace}}/$namespace2/g"| sed "s/{{port}}/$port2/g" |sed "s/{{dockerimage}}/$dockerImage/g"| `pwd`/kubectl apply -f -'
     }
     }
   }
