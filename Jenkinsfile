@@ -22,11 +22,12 @@ stage('Docker build for Prod') {
     }
 } 
  stage('Push image') {
+     steps{
         withDockerRegistry([ credentialsId: "dockerhub", url: "registry.hub.docker.com" ]) {
         dockerImage.push()
         }
  }
-        
+ }      
 }
 }
 
