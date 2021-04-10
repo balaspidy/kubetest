@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: {{namespace}}
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+     metadata:
+        labels:
+          app: frontend
+     spec:
+        containers:
+        - image: nginx:1.18
+          name: frontend
+          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: {{namespace}}
+spec:
+  ports:
+  - nodePort: {{port}}
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: frontend
+  sessionAffinity: None
+  type: NodePort
