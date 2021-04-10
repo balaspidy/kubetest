@@ -16,7 +16,6 @@ stage('Docker build for Prod') {
  when { branch "master" }
     steps {
       script {
-          docker.withRegistry( '', registryCredential ) 
           dockerImage = docker.build registry1 + ":$BUILD_NUMBER"
           docker.withRegistry( '', registryCredential ) 
           dockerImage.push()
