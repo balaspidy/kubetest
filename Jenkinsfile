@@ -21,6 +21,21 @@ stage('Docker build for Prod') {
       }
     }
 } 
+    
+stage('Docker build for Prod') {
+ when { 
+     expression {
+            return env.BRANCH_NAME != 'master';
+ }
+ }
+    steps {
+      script {
+          dockerImage = docker.build registrye + ":$BUILD_NUMBER"
+         
+      }
+    }
+}
+    
  stage('Push image') {
      steps{
          script{
